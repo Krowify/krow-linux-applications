@@ -179,6 +179,11 @@ deploy_colors() {
     # comment atop fastfetch-colors.jsonc.
     mkdir -p "${HOME}/.config/fastfetch"
     cp "${dir}/fastfetch-colors.jsonc" "${HOME}/.config/fastfetch/config.jsonc"
+
+    # Same story for the Starship prompt -- no @import, so this is the
+    # whole ~/.config/starship.toml, not a colors partial. See the
+    # comment atop starship-colors.toml.
+    cp "${dir}/starship-colors.toml" "${HOME}/.config/starship.toml"
 }
 
 apply_wallpaper() {

@@ -1,0 +1,141 @@
+# Deployed by theme.sh into ~/.config/starship.toml. Starship's config
+# has no @import either (same limitation as fastfetch, see
+# fastfetch-colors.jsonc's header), so this is the theme's *entire*
+# prompt config, not just a colors partial -- theme.sh replaces the
+# whole file on every switch. Same modules/format across all three
+# themes; only the [palettes.*] table (and the `palette =` line
+# selecting it) differ, using each theme's real accent colors -- every
+# `style = "bg:peach fg:crust"`-style reference elsewhere in the file
+# stays untouched, since it's just looking up these palette keys by name.
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[╭─](fg:surface2)\
+[](fg:surface1)\
+$os\
+[](bg:peach fg:surface1)\
+$directory\
+[](bg:yellow fg:peach)\
+$git_branch\
+$git_status\
+[](fg:yellow bg:green)\
+$c$rust$golang$nodejs$php$java$kotlin$haskell$python\
+[](fg:green bg:sapphire)\
+$conda\
+[](fg:sapphire bg:lavender)\
+$time\
+[](fg:lavender)\
+$line_break\
+[╰─](fg:surface2)\
+$character"""
+
+palette = 'graphite_mono'
+
+[os]
+disabled = false
+style = "bg:surface1 fg:text"
+
+[os.symbols]
+Arch = "   "
+Linux = " 󰌽  "
+
+[directory]
+style = "bg:peach fg:crust"
+format = "[ $path ]($style)"
+truncation_length = 0
+
+[directory.substitutions]
+"~" = " "
+
+[git_branch]
+symbol = " "
+style = "bg:yellow fg:crust"
+format = '[ $symbol$branch ]($style)'
+
+[git_status]
+style = "bg:yellow fg:crust"
+format = '[($all_status$ahead_behind )]($style)'
+
+[nodejs]
+symbol = " "
+style = "bg:green"
+format = '[[ $symbol](fg:crust bg:green)]($style)'
+
+[c]
+symbol = " "
+style = "bg:green"
+format = '[[ $symbol](fg:crust bg:green)]($style)'
+
+[rust]
+symbol = " "
+style = "bg:green"
+format = '[[ $symbol](fg:crust bg:green)]($style)'
+
+[golang]
+symbol = "󰟓 "
+style = "bg:green"
+format = '[[ $symbol](fg:crust bg:green)]($style)'
+
+[php]
+symbol = " "
+style = "bg:green"
+format = '[[ $symbol](fg:crust bg:green)]($style)'
+
+[java]
+symbol = " "
+style = "bg:green"
+format = '[[ $symbol](fg:crust bg:green)]($style)'
+
+[kotlin]
+symbol = " "
+style = "bg:green"
+format = '[[ $symbol](fg:crust bg:green)]($style)'
+
+[haskell]
+symbol = " "
+style = "bg:green"
+format = '[[ $symbol](fg:crust bg:green)]($style)'
+
+[python]
+symbol = " "
+style = "bg:green"
+format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:green)]($style)'
+
+[conda]
+symbol = " "
+style = "bg:sapphire"
+format = '[[ $symbol( $environment) ](fg:crust bg:sapphire)]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:lavender"
+format = '[[  $time ](fg:crust bg:lavender)]($style)'
+
+[line_break]
+disabled = false
+
+[character]
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+
+# peach/yellow/sapphire/lavender step through this theme's own two real
+# accent grays (#d9d9d9/#a6a6a6, see hypr-colors.conf) plus two
+# interpolated in-between shades, keeping the deliberately monochrome
+# identity -- see fastfetch-colors.jsonc's header for the same reasoning.
+# green/red are the one exception: kept as legible desaturated tones (not
+# gray) so [character]'s success/error state and git's ahead/behind
+# indicators stay usable -- a same-shade-of-gray ❯ for both a passing and
+# a failing command would defeat the point of that indicator.
+[palettes.graphite_mono]
+red = "#d98c8c"
+peach = "#d9d9d9"
+yellow = "#c2c2c2"
+green = "#8fbf8f"
+sapphire = "#8c8c8c"
+lavender = "#737373"
+crust = "#1a1a1a"
+surface2 = "#404040"
+surface1 = "#333333"
+surface0 = "#262626"
+text = "#d9d9d9"

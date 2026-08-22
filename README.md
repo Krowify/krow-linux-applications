@@ -302,16 +302,22 @@ Each theme lives in its own directory under `~/.config/hyde-themes/`
   (`hyprctl reload`, `killall -SIGUSR2 waybar`, `swaync-client -rs`,
   `eww reload` -- Alacritty/Wlogout need no reload, see
   [Color theming](#color-theming-matugen) below).
-- `fastfetch-colors.jsonc`, the one exception to the pattern above:
-  fastfetch's config format has no `@import`, so this is each theme's
-  *entire* `~/.config/fastfetch/config.jsonc`, not just a colors partial
-  -- `theme.sh set` copies the whole file into place (fastfetch reads it
-  fresh on every run, so nothing needs reloading). Module layout is
-  identical across all three themes; only `keyColor`/`logo.color` differ,
-  using each theme's real accent hex values directly (fastfetch supports
-  `#RRGGBB` `keyColor`s since v2.42.0) rather than named ANSI colors,
-  since Alacritty's ANSI 16-color palette stays static across themes and
-  wouldn't actually shift those on its own.
+- `fastfetch-colors.jsonc` and `starship-colors.toml`, two exceptions to
+  the pattern above: neither fastfetch's nor Starship's config format has
+  an `@import`, so each of these is a theme's *entire* config
+  (`~/.config/fastfetch/config.jsonc` / `~/.config/starship.toml`), not
+  just a colors partial -- `theme.sh set` copies the whole file into
+  place (both tools re-read their config fresh on every run, so nothing
+  needs reloading). Module/prompt layout is identical across all three
+  themes; only the color values differ -- fastfetch's `keyColor`/
+  `logo.color` go straight to each theme's real accent hex (fastfetch
+  supports `#RRGGBB` `keyColor`s since v2.42.0, used instead of named
+  ANSI colors since Alacritty's ANSI 16-color palette stays static across
+  themes and wouldn't actually shift those on its own); Starship's
+  `[palettes.*]` table is swapped (and the top-level `palette =` line
+  with it) while every `style = "bg:peach fg:crust"`-style reference
+  elsewhere in the file stays untouched, since those just look up
+  palette keys by name.
 - `theme.conf`, naming the GTK theme + icon theme this desktop theme
   needs (as case-insensitive glob patterns, same idea as stage 5's old
   folder detection) and, optionally, a URL to fetch them from if they
