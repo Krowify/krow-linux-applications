@@ -1,9 +1,13 @@
-// Deployed by 5-dotfiles.sh. Static fallback matching the default theme
-// (Tokyo Night) -- overwritten in-place by theme.sh if you switch themes
-// (see dotfiles/hyde-themes/<theme>/fastfetch-colors.jsonc, deployed by
-// theme.sh's deploy_colors, same pattern as alacritty/colors.toml).
-// Ported from Muhammad Haikal Hakim's Athena (see README credits):
-// https://github.com/haikal-hakim/athena
+// Deployed by theme.sh into ~/.config/fastfetch/config.jsonc. Fastfetch has
+// no @import for a separate colors file (unlike alacritty.toml/rofi's
+// config.rasi), so this is the *entire* themed config, not just a colors
+// partial -- theme.sh replaces the whole file on every switch. Same
+// module layout as dotfiles/fastfetch/config.jsonc (the Athena-derived
+// default, see its own header) across all three themes; only keyColor and
+// logo.color differ, using each theme's real accent palette (see that
+// theme's hypr-colors.conf/rofi-colors.rasi) instead of generic ANSI
+// color names, since alacritty's ANSI 16-color palette stays static
+// across themes and wouldn't actually shift these on its own.
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
@@ -14,8 +18,8 @@
       "right": 3
     },
     "color": {
-      "1": "#00D1FF",
-      "2": "#BD93F9"
+      "1": "#7dcfff",
+      "2": "#bb9af7"
     }
   },
   "display": {
@@ -36,33 +40,33 @@
     {
       "type": "os",
       "key": "     󰣇 OS      ",
-      "keyColor": "31"
+      "keyColor": "#f7768e"
     },
     {
       "type": "host",
       "key": "      Device  ",
       "format": "{2}",
-      "keyColor": "33"
+      "keyColor": "#e0af68"
     },
     {
       "type": "kernel",
       "key": "      Kernel  ",
-      "keyColor": "32"
+      "keyColor": "#9ece6a"
     },
     {
       "type": "packages",
       "key": "     󰏖 Packages",
-      "keyColor": "36"
+      "keyColor": "#7dcfff"
     },
     {
       "type": "terminal",
       "key": "     󰞷 Terminal",
-      "keyColor": "34"
+      "keyColor": "#7aa2f7"
     },
     {
       "type": "wm",
       "key": "     󱂬 WM      ",
-      "keyColor": "35"
+      "keyColor": "#bb9af7"
     },
     {
       "type": "custom",
@@ -81,36 +85,36 @@
     {
       "type": "cpu",
       "key": "     󰻠 CPU     ",
-      "keyColor": "31",
+      "keyColor": "#f7768e",
       "format": "{1}"
     },
     {
       "type": "gpu",
       "key": "     󰢮 GPU     ",
-      "keyColor": "33",
+      "keyColor": "#e0af68",
       "format": "{2}"
     },
     {
       "type": "memory",
       "key": "     󰍛 Memory  ",
-      "keyColor": "32"
+      "keyColor": "#9ece6a"
     },
     {
       "type": "display",
       "key": "     󰹑 Display ",
-      "keyColor": "36",
+      "keyColor": "#7dcfff",
       "format": "{width}x{height} @ {refresh-rate} Hz"
     },
     {
       "type": "command",
       "key": "      OS Age  ",
       "text": "birthd=$(stat -c %W /); echo $(( ( $(date +%s) - birthd ) / 86400 )) days",
-      "keyColor": "34"
+      "keyColor": "#7aa2f7"
     },
     {
       "type": "uptime",
       "key": "     󰅐 Uptime  ",
-      "keyColor": "35"
+      "keyColor": "#bb9af7"
     },
     {
       "type": "custom",

@@ -302,6 +302,16 @@ Each theme lives in its own directory under `~/.config/hyde-themes/`
   (`hyprctl reload`, `killall -SIGUSR2 waybar`, `swaync-client -rs`,
   `eww reload` -- Alacritty/Wlogout need no reload, see
   [Color theming](#color-theming-matugen) below).
+- `fastfetch-colors.jsonc`, the one exception to the pattern above:
+  fastfetch's config format has no `@import`, so this is each theme's
+  *entire* `~/.config/fastfetch/config.jsonc`, not just a colors partial
+  -- `theme.sh set` copies the whole file into place (fastfetch reads it
+  fresh on every run, so nothing needs reloading). Module layout is
+  identical across all three themes; only `keyColor`/`logo.color` differ,
+  using each theme's real accent hex values directly (fastfetch supports
+  `#RRGGBB` `keyColor`s since v2.42.0) rather than named ANSI colors,
+  since Alacritty's ANSI 16-color palette stays static across themes and
+  wouldn't actually shift those on its own.
 - `theme.conf`, naming the GTK theme + icon theme this desktop theme
   needs (as case-insensitive glob patterns, same idea as stage 5's old
   folder detection) and, optionally, a URL to fetch them from if they

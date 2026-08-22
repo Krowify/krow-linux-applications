@@ -173,6 +173,12 @@ deploy_colors() {
 
     cp "${dir}/eww-colors.scss" "${HOME}/.config/eww/colors.scss"
     timeout 5 eww reload >/dev/null 2>&1 || true
+
+    # fastfetch has no @import for a separate colors file, so this is the
+    # theme's *entire* config, not just a colors partial -- see the
+    # comment atop fastfetch-colors.jsonc.
+    mkdir -p "${HOME}/.config/fastfetch"
+    cp "${dir}/fastfetch-colors.jsonc" "${HOME}/.config/fastfetch/config.jsonc"
 }
 
 apply_wallpaper() {
