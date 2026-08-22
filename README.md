@@ -17,6 +17,9 @@ applications.
 | System info banner | fastfetch |
 | Logout menu | Wlogout |
 | Widgets | Eww |
+| Dock | Quickshell (ported from mylinuxforwork/dotfiles) |
+| Workspace overview | Quickshell (Shanu-Kumawat/quickshell-overview, `Super+O`) |
+| Qt app theming | qt6ct + xsettingsd |
 | Settings GUI | hyprmod |
 | Theme | Tokyo Night (default), Decay Green, or Graphite Mono, switchable with `theme.sh` (`Super+Shift+T`) -- see [Theme switching](#theme-switching) and [Credits](CREDITS.txt) |
 | Icon theme | Tela-circle-purple (Tokyo Night) / Tela-circle-green (Decay Green) / Tela-circle-grey (Graphite Mono) |
@@ -135,9 +138,10 @@ wherever this repo has an equivalent app or Hyprland dispatcher for it --
 see the comment above the keybinds section in `dotfiles/hypr/hyprland.conf`
 for what wasn't ported (HyDE features that call into its own
 `~/.local/lib/hyde/` helper scripts, which this repo doesn't install) and
-why. A couple of this repo's own pre-existing binds (`Super+Return`,
-`Super+F`) are kept as extra aliases alongside HyDE's key for the same
-action.
+why. Where this repo's own pre-existing key and HyDE's key both did the
+same thing (`Super+Return`/`Super+T` for terminal, `Super+A`/`Super+Tab`
+for the launcher, `Super+W`/`Super+F` for toggle-floating), the duplicate
+was dropped rather than kept as an alias -- one bind per action.
 
 Grouped into Super binds, Alt binds, window-movement binds (focus/resize/
 move/group-cycle -- these all happen to use Super too, but get their own
@@ -146,36 +150,62 @@ media, and the handful of binds with neither modifier).
 
 ### Super
 
+Grouped by what each bind actually does, terminal first.
+
+**Terminal**
+
 | Keybind | Action |
 |---------|--------|
-| `Super+Return` / `Super+T` | Terminal (Alacritty) |
+| `Super+Return` | Terminal (Alacritty) |
 | `Super+Alt+T` | Dropdown terminal (own special workspace) |
-| `Super+A` / `Super+Tab` | App launcher (Rofi) |
+
+**Close, force-kill, exit**
+
+| Keybind | Action |
+|---------|--------|
 | `Super+Q` | Close focused window |
 | `Super+Alt+F4` | Force-kill focused window |
 | `Super+Delete` | Exit Hyprland session |
-| `Super+E` | File manager (Thunar) |
-| `Super+Shift+E` | File finder (Rofi) |
-| `Super+C` | Text editor (VS Code) |
-| `Super+B` | Web browser (Brave) |
-| `Super+V` / `Super+Shift+V` | Clipboard history (cliphist + Rofi) |
-| `Super+Shift+/` | Web search (Rofi prompt) |
-| `Super+L` | Lock screen (Hyprlock) |
 | `Super+Escape` | Logout menu (Wlogout) |
-| `Super+W` / `Super+F` | Toggle floating |
-| `Super+M` | Toggle Eww widget panel |
+| `Super+L` | Lock screen (Hyprlock) |
+
+**Toggle**
+
+| Keybind | Action |
+|---------|--------|
+| `Super+T` | Toggle floating |
 | `Super+G` | Toggle group |
 | `Super+Shift+F` | Toggle pin on focused window |
-| `Super+Ctrl+B` | Toggle waybar |
 | `Super+J` | Toggle split |
+| `Super+M` | Toggle Eww widget panel |
+| `Super+O` | Toggle workspace overview (Quickshell) |
+| `Super+Ctrl+B` | Toggle waybar |
 | `Super+N` | Toggle notification center (SwayNC) |
-| `Super+Shift+W` | Open wallpaper picker (waypaper) |
-| `Super+Shift+T` | Open theme picker (`theme.sh menu`) |
 | `Super+Shift+N` | Toggle blue light filter (hyprsunset) |
+
+**Launchers and apps**
+
+| Keybind | Action |
+|---------|--------|
+| `Super+Tab` | App launcher (Rofi) |
+| `Super+A` | Fullscreen app grid (Rofi, "launchpad" style) |
+| `Super+Shift+G` | Game-tile app grid (Rofi) |
+| `Super+Shift+Q` | Quick-launch icon strip (Rofi) |
+| `Super+Shift+E` | File finder (Rofi) |
+| `Super+Shift+V` | Clipboard history (cliphist + Rofi) |
+| `Super+Shift+/` | Web search (Rofi prompt) |
+| `Super+E` | File manager (Thunar) |
+| `Super+C` | Text editor (VS Code) |
+| `Super+B` | Web browser (Brave) |
+
+**Workspace and theming**
+
+| Keybind | Action |
+|---------|--------|
 | `Super+Ctrl+Right/Left` | Next/previous workspace (relative) |
 | `Super+Ctrl+Down` | Go to nearest empty workspace |
-| `Super+S` | Toggle scratchpad |
-| `Super+Shift+S` / `Super+Alt+S` | Move window to scratchpad / silently |
+| `Super+Shift+W` | Open wallpaper picker (waypaper) |
+| `Super+Shift+T` | Open theme picker (`theme.sh menu`) |
 
 ### Alt
 

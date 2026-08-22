@@ -101,6 +101,29 @@ PKGS=(
                                           # and re-themes Hyprland/Waybar/
                                           # SwayNC/Alacritty from it -- see
                                           # the README's color theming section
+    'quickshell'                         # QtQuick-based shell toolkit --
+                                          # backs the dock and workspace
+                                          # overview below. Routed through
+                                          # yay rather than stage 2's plain
+                                          # pacman since this repo hasn't
+                                          # confirmed it's in the official
+                                          # repos on every install target
+                                          # (yay falls back to pacman
+                                          # transparently either way, so
+                                          # this is safe regardless)
+    'quickshell-overview-git'            # Workspace overview module (all
+                                          # workspaces at once, live window
+                                          # previews, drag-and-drop) --
+                                          # ported from Shanu-Kumawat/
+                                          # quickshell-overview, its own
+                                          # separately-maintained project
+                                          # with this AUR package; see
+                                          # dotfiles/quickshell-overview/.
+                                          # The dock (dotfiles/quickshell-
+                                          # dock/) has no equivalent
+                                          # standalone package -- it's
+                                          # ported directly from
+                                          # mylinuxforwork/dotfiles instead
 
     # THEMES -----------------------------------------------------------------
     # This only themes the SDDM login screen itself, independent of the

@@ -8,7 +8,11 @@
 * {
     bg:             {{colors.background.default.hex}};
     bg-element:     {{colors.surface.default.hex}}00;
-    bg-selected:    {{colors.secondary.default.hex}};
+    /* surface_container_high, not secondary/tertiary/etc -- a tonal step
+     * of the same neutral background, not a separate accent hue, so the
+     * selected row reads as "a bit lighter" rather than "a different
+     * color jumping out." */
+    bg-selected:    {{colors.surface_container_high.default.hex}};
     bg-dock:        {{colors.primary.default.hex}};
     bg-btn:         {{colors.surface_container.default.hex}}d9;
     bg-btn-active:  {{colors.on_background.default.hex}}f2;

@@ -52,3 +52,24 @@ post_hook = "eww reload"
 [templates.rofi]
 input_path = "~/.config/matugen/templates/rofi-colors.rasi"
 output_path = "~/.config/rofi/colors.rasi"
+
+# Quickshell dock (dotfiles/quickshell-dock/) -- a running daemon like
+# waybar, but its color source is read at runtime via an IPC call rather
+# than a file the process watches, so the post_hook calls that instead of
+# killing/restarting anything.
+[templates.quickshell-dock]
+input_path = "~/.config/matugen/templates/quickshell-dock-colors.json"
+output_path = "~/.config/ml4w/colors/colors.json"
+post_hook = "qs ipc -c dock call theme-manager reload"
+
+# Quickshell workspace overview (dotfiles/quickshell-overview/) -- also a
+# running daemon (exec-once'd, toggled via IPC rather than launched fresh
+# per invocation), but unlike the dock its colors are plain QML property
+# values compiled into the component tree at process start, not something
+# it re-reads at runtime -- there's no IPC call that makes a running
+# instance pick up a new Appearance.colors.qml. No post_hook here on
+# purpose: a new palette takes effect on the next `qs -c overview` restart
+# (next login, or manually: `pkill -f "qs -c overview"; qs -c overview &`).
+[templates.quickshell-overview]
+input_path = "~/.config/matugen/templates/quickshell-overview-colors.qml"
+output_path = "~/.config/quickshell/overview/common/Appearance.colors.qml"

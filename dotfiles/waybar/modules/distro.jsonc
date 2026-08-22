@@ -2,7 +2,7 @@
   // App shortcuts, adapted to what this repo actually installs (Athena's
   // originals were kitty/onlyoffice/Firefox -- see README credits).
   "custom/distro": {
-    "format": "",
+    "format": "",
     "tooltip": false
   },
   "custom/terminal": {
@@ -31,12 +31,12 @@
     "tooltip": false
   },
   "custom/spotify": {
-    "format": "",
+    "format": "󰓇",
     "on-click": "spotify-launcher",
     "tooltip": false
   },
   "custom/browser": {
-    "format": "",
+    "format": "",
     "on-click": "brave",
     "tooltip": false
   }

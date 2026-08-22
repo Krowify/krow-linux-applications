@@ -3,10 +3,10 @@
     "format": "{icon}",
     "tooltip-format": "󰓅   {profile}\n󰒓   {driver}",
     "format-icons": {
-      "default": "",
-      "performance": "",
-      "balanced": "󰶘",
-      "power-saver": ""
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
     }
   }
 }

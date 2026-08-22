@@ -24,8 +24,7 @@ bind = $mod, Q, killactive,
 bind = ALT, F4, killactive,
 bind = $mod ALT, F4, forcekillactive,
 bind = $mod, Delete, exit,
-bind = $mod, W, togglefloating,
-bind = $mod, F, togglefloating,
+bind = $mod, T, togglefloating,
 bind = $mod, G, togglegroup,
 bind = ALT, P, pseudo,
 bind = SHIFT, F11, fullscreen, 0
@@ -93,7 +92,6 @@ bind = $mod CTRL SHIFT, down, movewindow, d
 
 ```
 bind = $mod, Return, exec, alacritty
-bind = $mod, T, exec, alacritty
 bind = $mod ALT, T, exec, hyprctl clients -j | jq -e '.[] | select(.class=="dropterm")' >/dev/null && hyprctl dispatch togglespecialworkspace dropterm || alacritty --class dropterm
 bind = $mod, E, exec, thunar
 bind = $mod, C, exec, code
@@ -111,12 +109,32 @@ windowrule = match:class ^(dropterm)$, float on, size 60% 60%, center on, worksp
 ## Launcher: Rofi menus
 
 ```
-bind = $mod, A, exec, rofi -show drun -modi drun,filebrowser,window,run
 bind = $mod, TAB, exec, rofi -show drun -modi drun,filebrowser,window,run
 bind = $mod SHIFT, E, exec, rofi -show filebrowser
-bind = $mod, V, exec, sh -c 'cliphist list | rofi -dmenu -theme ~/.config/rofi/clipboard.rasi | cliphist decode | wl-copy'
 bind = $mod SHIFT, V, exec, sh -c 'cliphist list | rofi -dmenu -theme ~/.config/rofi/clipboard.rasi | cliphist decode | wl-copy'
 bind = $mod SHIFT, slash, exec, sh -c 'q="$(rofi -dmenu -p Search)"; [ -n "$q" ] && xdg-open "https://www.google.com/search?q=$q"'
+```
+
+## Launcher: alternate Rofi styles
+
+Each just `drun` restyled with a different `-theme` -- see `dotfiles/rofi/`
+(ported from HyDE-Project/HyDE's `Configs/.local/share/hyde/rofi/themes/`).
+
+```
+bind = $mod, A, exec, rofi -show drun -theme ~/.config/rofi/launchpad.rasi
+bind = $mod SHIFT, G, exec, rofi -show drun -theme ~/.config/rofi/gamelauncher_2.rasi
+bind = $mod SHIFT, Q, exec, rofi -show drun -theme ~/.config/rofi/quickapps.rasi
+```
+
+## Quickshell workspace overview
+
+Needs `quickshell` + `quickshell-overview-git` (stage 3, AUR) -- see
+`dotfiles/quickshell-overview/`. Auto-started (`exec-once = qs -c overview`
+in `hyprland.conf`'s Autostart section), toggled via IPC rather than
+launched fresh per invocation:
+
+```
+bind = $mod, O, exec, qs ipc -c overview call overview toggle
 ```
 
 ## Hardware controls: audio
@@ -204,14 +222,6 @@ bind = $mod, mouse_up, workspace, e-1
 ```
 bind = $mod CTRL, right, workspace, e+1
 bind = $mod CTRL, left, workspace, e-1
-```
-
-## Workspaces: special (scratchpad)
-
-```
-bind = $mod SHIFT, S, movetoworkspace, special
-bind = $mod ALT, S, movetoworkspacesilent, special
-bind = $mod, S, togglespecialworkspace,
 ```
 
 ## Workspaces: move window silently

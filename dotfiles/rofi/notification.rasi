@@ -1,0 +1,108 @@
+/* Deployed by 5-dotfiles.sh. Ported from HyDE-Project/HyDE's
+ * Configs/.local/share/hyde/rofi/themes/notification.rasi ("notification
+ * prompt") -- a near-square dialog listing up to 5 lines. Not bound to a
+ * keybind: this repo's actual notification history/center is SwayNC
+ * (see waybar's tray-notif.jsonc), so wiring this up too would just be a
+ * second, competing notification UI. Included as an available style
+ * only, for whatever `-dmenu`-style prompt might want its look later.
+ *
+ * HyDE's original sets a background-image of a static, HyDE-branded
+ * asset (literally reads "NOTIFICATION", fixed pastel colors) -- dropped
+ * for the same reason as theme-picker.rasi: it wouldn't track this
+ * repo's active theme the way @main-bg does. A solid panel + border-
+ * radius stands in for it below.
+ */
+
+// Config //
+configuration {
+    modi:                        "drun";
+    show-icons:                  true;
+    drun-display-format:         "{name}";
+    font:                        "JetBrainsMono Nerd Font 9";
+}
+
+@theme "~/.config/rofi/theme.rasi"
+
+
+// Main //
+window {
+    enabled:                     true;
+    fullscreen:                  false;
+    width:                       40em;
+    height:                      32.8em;
+    transparency:                "real";
+    cursor:                      "default";
+    spacing:                     0em;
+    padding:                     0em;
+    border:                      0em;
+    border-radius:               1.2em;
+    border-color:                @main-br;
+    background-color:            @main-bg;
+}
+mainbox {
+    enabled:                     true;
+    orientation:                 vertical;
+    children:                    [ "dummy" , "frame" ];
+    background-color:            transparent;
+}
+dummy {
+    padding:                     6em;
+    expand:                      false;
+    background-color:            transparent;
+}
+frame {
+    enabled:                     true;
+    orientation:                 vertical;
+    children:                    [ "dummy2" , "listview" , "dummy2" ];
+    background-color:            transparent;
+}
+
+// Lists //
+listview {
+    enabled:                     true;
+    spacing:                     0em;
+    padding:                     0em;
+    columns:                     1;
+    lines:                       5;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    expand:                      false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    cursor:                      "default";
+    background-color:            transparent;
+}
+dummy2 {
+    spacing:                     0em;
+    padding:                     0em;
+    background-color:            transparent;
+}
+
+
+// Elements //
+element {
+    enabled:                     true;
+    spacing:                     1em;
+    padding:                     1em;
+    cursor:                      pointer;
+    background-color:            transparent;
+    text-color:                  @main-fg;
+    border-radius:               0em;
+}
+element selected.normal {
+    background-color:            @select-bg;
+    text-color:                  @select-fg;
+}
+element-icon {
+    enabled:                     false;
+}
+element-text {
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+}

@@ -7,10 +7,10 @@
     "format-paused": "{status_icon} {dynamic}",
     "player-icons": {
       "default": "▶",
-      "spotify": ""
+      "spotify": ""
     },
     "status-icons": {
-      "paused": "⏸"
+      "paused": ""
     },
     "max-length": 40
   }

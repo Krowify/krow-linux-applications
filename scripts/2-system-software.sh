@@ -118,8 +118,19 @@ PKGS=(
                                    # actually renders through this
     'grim'                        # Screenshot utility
     'slurp'                       # Region/window selector, used with grim
+    'imagemagick'                 # Provides 'magick', used by
+                                   # dotfiles/rofi/gen-wallcache.sh to
+                                   # blur/crop the current wallpaper for
+                                   # a couple of rofi layouts
     'hyprsunset'                  # Blue light filter, toggled with
                                    # Super+Shift+N
+    'qt6ct'                       # Qt6 platform theme -- makes Qt apps
+                                   # (kate, pavucontrol, ...) pick up the
+                                   # GTK theme instead of rendering
+                                   # unstyled; see dotfiles/qt6ct/
+    'xsettingsd'                  # Propagates theme/icon/cursor to GTK2/
+                                   # Xwayland clients via XSETTINGS; see
+                                   # dotfiles/xsettingsd/
     'jq'                          # JSON processing -- used by a couple of
                                    # hyprland.conf's own keybinds (focused-
                                    # monitor screenshot, dropdown terminal

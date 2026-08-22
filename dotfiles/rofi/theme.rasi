@@ -1,0 +1,28 @@
+/* Deployed by 5-dotfiles.sh. Bridges HyDE-Project/HyDE's rofi variable
+ * names (@main-bg/@main-fg/@main-br/@main-ex/@select-bg/@select-fg/
+ * @separatorcolor/@border-color) to this repo's own tokens in colors.rasi
+ * (@bg/@fg/...), which theme.sh/Matugen already keep current -- see the
+ * README's theme switching section. Every layout borrowed from HyDE's
+ * Configs/.local/share/hyde/rofi/themes/ imports this file with
+ * `@theme "~/.config/rofi/theme.rasi"` unmodified, so it picks up
+ * whichever theme this repo currently has active without a second,
+ * parallel color system to keep in sync.
+ *
+ * select-fg is pinned to @bg rather than aliased to an HyDE-side
+ * "on-select text" role this repo doesn't have -- every bg-selected
+ * accent across tokyo-night/decay-green/graphite-mono (and Matugen's
+ * secondary color) is light/mid enough that dark text reads reliably
+ * against all of them.
+ */
+@import "colors.rasi"
+
+* {
+    main-bg:         @bg;
+    main-fg:         @fg;
+    main-br:         @border-win;
+    main-ex:         @fg-prompt;
+    select-bg:       @bg-selected;
+    select-fg:       @bg;
+    separatorcolor:  transparent;
+    border-color:    transparent;
+}

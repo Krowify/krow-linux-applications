@@ -12,8 +12,8 @@
     bg-dock:        rgb(217, 217, 217);
     bg-btn:         rgba(45, 45, 45, 0.85);
     bg-btn-active:  rgba(229, 229, 229, 0.95);
-    fg:             #d9d9d9;
-    fg-muted:       #ffffff;
+    fg:             #333333;
+    fg-muted:       #333333;
     fg-btn:         #a6a6a6;
     fg-btn-active:  rgba(38, 38, 38, 0.95);
     border-win:     rgba(166, 166, 166, 1.0);

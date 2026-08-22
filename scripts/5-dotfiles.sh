@@ -50,10 +50,29 @@ deploy_dir() {
     echo "Deployed ~/.config/${name}"
 }
 
-for dir in hypr waybar alacritty wlogout eww swaync matugen waypaper fastfetch rofi hyde-themes; do
+for dir in hypr waybar alacritty wlogout eww swaync matugen waypaper fastfetch rofi hyde-themes qt6ct xsettingsd; do
     deploy_dir "${dir}"
 done
 chmod +x "${HOME}/.config/hyde-themes/theme.sh"
+chmod +x "${HOME}/.config/rofi/gen-wallcache.sh"
+
+# --- Quickshell dock and workspace overview: each is its own named config
+# under ~/.config/quickshell/<name>/ (`qs -c <name>`), not a same-named
+# top-level dir the way deploy_dir assumes -- dotfiles/quickshell-dock/
+# becomes ~/.config/quickshell/dock/, dotfiles/quickshell-overview/ becomes
+# ~/.config/quickshell/overview/. See dotfiles/hypr/hyprland.conf's
+# exec-once/keybind lines for how these actually get launched.
+for qs_name in dock overview; do
+    qs_dest="${HOME}/.config/quickshell/${qs_name}"
+    if [[ -e "${qs_dest}" || -L "${qs_dest}" ]]; then
+        echo "Backing up existing ~/.config/quickshell/${qs_name} -> ${qs_name}.bak"
+        rm -rf "${qs_dest}.bak"
+        mv "${qs_dest}" "${qs_dest}.bak"
+    fi
+    mkdir -p "${HOME}/.config/quickshell"
+    cp -r "${DOTFILES_DIR}/quickshell-${qs_name}" "${qs_dest}"
+    echo "Deployed ~/.config/quickshell/${qs_name}"
+done
 
 # --- waypaper's `folder` setting (dotfiles/waypaper/config.ini) points
 # here, and theme.sh drops each theme's own bundled wallpaper (e.g. Tokyo
@@ -76,6 +95,19 @@ for gtk_dir in gtk-3.0 gtk-4.0; do
     cp "${DOTFILES_DIR}/${gtk_dir}/settings.ini" "${dest}"
     echo "Deployed ~/.config/${gtk_dir}/settings.ini"
 done
+
+# --- Hide launcher clutter that isn't ours to fix at the source: Avahi
+# (not installed by this repo, but a common transitive dependency of other
+# packages) ships three .desktop entries that show up in every drun-based
+# launcher regardless of whether you use zeroconf browsing. Overriding them
+# with NoDisplay=true in ~/.local/share/applications/ (higher XDG precedence
+# than /usr/share/applications/) hides them without touching the avahi
+# package itself, so a future update can't silently re-clutter the list.
+# Copied individually (not via deploy_dir) since ~/.local/share/applications
+# holds real installed-app entries this repo shouldn't move aside wholesale.
+mkdir -p "${HOME}/.local/share/applications"
+cp "${DOTFILES_DIR}/local-applications/"*.desktop "${HOME}/.local/share/applications/"
+echo "Deployed ~/.local/share/applications/ overrides (hides Avahi's launcher clutter)"
 
 # --- Vesktop: only the BetterDiscord-style theme(s) under themes/ are
 # ours -- deploy just that subfolder rather than the whole directory via

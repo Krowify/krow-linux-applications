@@ -1,0 +1,99 @@
+/* Deployed by 5-dotfiles.sh. Repurposed from HyDE-Project/HyDE's
+ * Configs/.local/share/hyde/rofi/themes/wallbash.rasi ("Wallbash mode
+ * Selector") -- HyDE's original switches between Wallbash's
+ * dynamically-generated light/dark color-mode variants, a pipeline this
+ * repo doesn't have (Matugen does one-shot recoloring, not multiple
+ * modes to pick between). Repurposed instead as the visual for this
+ * repo's own real theme picker: theme.sh's `cmd_menu()` (Super+Shift+T)
+ * pipes `theme.sh list`'s output (tokyo-night/decay-green/graphite-mono)
+ * through `rofi -dmenu -theme theme-picker.rasi`, so the 3 real themes
+ * show up as big text tiles instead of a plain dropdown list.
+ *
+ * columns dropped from HyDE's 4 to 3 (this repo has exactly 3 themes).
+ * HyDE's original also sets a background-image of Wallbash's own
+ * branded artwork (literally reads "wallBASH") -- dropped, both because
+ * it doesn't apply to what this file now does and because it's a static
+ * asset that wouldn't track the active theme's actual colors the way
+ * @main-bg does.
+ */
+
+// Config //
+configuration {
+    modi:                        "drun";
+    show-icons:                  true;
+    drun-display-format:         "{name}";
+    font:                        "JetBrainsMono Nerd Font 9";
+}
+
+@theme "~/.config/rofi/theme.rasi"
+
+
+// Main //
+window {
+    enabled:                     true;
+    fullscreen:                  false;
+    width:                       40em;
+    height:                      20em;
+    transparency:                "real";
+    cursor:                      "default";
+    spacing:                     0em;
+    padding:                     0em;
+    border:                      1em;
+    border-radius:               1em;
+    border-color:                @main-br;
+    background-color:            @main-bg;
+}
+mainbox {
+    enabled:                     true;
+    orientation:                 vertical;
+    children:                    [ "dummy" , "listview" ];
+    background-color:            transparent;
+}
+
+
+// Lists //
+listview {
+    enabled:                     true;
+    spacing:                     1em;
+    padding:                     1em 2em 2.5em 2em;
+    columns:                     3;
+    lines:                       1;
+    dynamic:                     false;
+    fixed-height:                false;
+    fixed-columns:               true;
+    reverse:                     true;
+    cursor:                      "default";
+    background-color:            transparent;
+    text-color:                  @main-fg;
+}
+dummy {
+    padding:                     4em;
+    expand:                      false;
+    background-color:            transparent;
+}
+
+
+// Elements //
+element {
+    enabled:                     true;
+    spacing:                     0em;
+    padding:                     1.5em;
+    cursor:                      pointer;
+    background-color:            @main-bg;
+    text-color:                  @main-fg;
+    border-radius:               0.6em;
+}
+element selected.normal {
+    background-color:            @select-bg;
+    text-color:                  @select-fg;
+}
+element-icon {
+    enabled:                     false;
+}
+element-text {
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+}

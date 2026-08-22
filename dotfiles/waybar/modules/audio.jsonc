@@ -1,15 +1,18 @@
 {
   "pulseaudio": {
     "format": "{icon}",
-    "format-muted": "",
+    "format-muted": "婢",
     "format-icons": {
-      "headphone": "󰋋",
-      "headset": "󰋋",
-      "hands-free": "󰋋",
+      "headphone": "",
+      "headset": "",
+      "hands-free": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
       "default": [
-        "",
-        "",
-        ""
+        "",
+        "",
+        ""
       ]
     },
     "on-click": "pavucontrol",
@@ -17,8 +20,8 @@
   },
   "pulseaudio#microphone": {
     "format": "{format_source}",
-    "format-source": "",
-    "format-source-muted": ""
+    "format-source": "󰍬",
+    "format-source-muted": ""
   },
   "pulseaudio/slider": {
     "min": 0,
