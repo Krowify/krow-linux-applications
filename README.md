@@ -114,7 +114,9 @@ startup.
 SDDM is used as the login manager. Once stage 1 finishes, the
 `hyprland` package's own `.desktop` entries make Hyprland selectable
 from SDDM's session dropdown with nothing further to configure -- pick
-"Hyprland (uwsm-managed)" if it's offered, otherwise plain "Hyprland".
+"Hyprland uwsm" if it's offered, otherwise plain "Hyprland". (Stage 6
+renames it from the package's default "Hyprland (uwsm-managed)" --
+some SDDM themes clip/overlap the longer name.)
 
 ## Dotfiles (stage 5)
 

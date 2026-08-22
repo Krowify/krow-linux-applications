@@ -28,13 +28,35 @@ echo "fs.inotify.max_user_watches=524288" | "${SUDO[@]}" tee /etc/sysctl.d/40-ma
 "${SUDO[@]}" sysctl --system
  
 # ------------------------------------------------------------------------
+# Shorten the uwsm-managed Hyprland session's display name in SDDM's
+# session dropdown. The hyprland/uwsm packages ship it as "Hyprland
+# (uwsm-managed)" -- too long for some SDDM themes (e.g. Qylock's
+# pixel-sakura, stage 3) and it gets clipped/overlapped there. This
+# patches the package-owned .desktop file directly, so it re-runs every
+# time this stage runs (not just once): the file isn't a pacman "backup"
+# config, so a future hyprland/uwsm package update silently overwrites it
+# back to the long name with no .pacnew warning to catch it.
+echo
+echo "Shortening the uwsm-managed Hyprland session name in SDDM"
+UWSM_SESSION_DESKTOP="$(grep -rlF 'uwsm-managed' /usr/share/wayland-sessions/*.desktop 2>/dev/null | head -n1)"
+if [[ -n "${UWSM_SESSION_DESKTOP}" ]]; then
+    "${SUDO[@]}" sed -i 's/^Name=.*/Name=Hyprland uwsm/' "${UWSM_SESSION_DESKTOP}"
+    echo "Patched ${UWSM_SESSION_DESKTOP} -> Name=Hyprland uwsm"
+else
+    echo "WARNING: no wayland-sessions .desktop file mentioning" >&2
+    echo "'uwsm-managed' found under /usr/share/wayland-sessions -- skipping." >&2
+    echo "Check that the hyprland/uwsm packages are installed; the file this" >&2
+    echo "patches may also have been renamed by a newer package version." >&2
+fi
+
+# ------------------------------------------------------------------------
 echo
 echo "Enabling login display manager"
 "${SUDO[@]}" systemctl enable --now sddm.service
-echo "NOTE: at the SDDM login screen, pick 'Hyprland (uwsm-managed)' from"
-echo "the session dropdown if it's offered -- that's the currently"
-echo "recommended way to launch it. A plain 'Hyprland' entry is also"
-echo "available if you'd rather not use uwsm."
+echo "NOTE: at the SDDM login screen, pick 'Hyprland uwsm' from the session"
+echo "dropdown if it's offered -- that's the currently recommended way to"
+echo "launch it. A plain 'Hyprland' entry is also available if you'd"
+echo "rather not use uwsm."
 echo
 echo "NOTE: pipewire/wireplumber run as user (not system) services and are"
 echo "generally auto-started on login via socket activation. If audio isn't"

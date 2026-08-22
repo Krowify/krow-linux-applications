@@ -126,10 +126,12 @@ PKGS=(
                                           # mylinuxforwork/dotfiles instead
 
     # THEMES -----------------------------------------------------------------
-    # This only themes the SDDM login screen itself, independent of the
-    # Hyprland session you log into afterward -- it doesn't need Plasma and
-    # nothing above changes how it works.
-    'sddm-theme-elegant-archlinux-git'   # SDDM login theme
+    # No SDDM login theme package here anymore -- Qylock's 'pixel-sakura'
+    # (github.com/Darkkal44/qylock) isn't packaged for the AUR, so it's
+    # installed by hand further down instead. This only themes the SDDM
+    # login screen itself, independent of the Hyprland session you log
+    # into afterward -- it doesn't need Plasma and nothing above changes
+    # how it works.
     'bibata-cursor-theme-bin'            # Cursor theme, prebuilt
 
     # PRODUCTIVITY -----------------------------------------------------------
@@ -141,7 +143,29 @@ for PKG in "${PKGS[@]}"; do
     echo "INSTALLING: ${PKG}"
     yay -S --noconfirm --needed "${PKG}"
 done
- 
+
+# --- Install Qylock's 'pixel-sakura' SDDM theme. It isn't packaged in the
+# AUR, so it's pulled straight from its GitHub repo instead of via yay --
+# only the one theme subfolder is copied (it's fully self-contained, no
+# shared assets live elsewhere in that repo). Qylock's own sddm.sh
+# installer is skipped entirely: it's interactive (prompts for Qt5/Qt6 and
+# a theme choice on stdin), which doesn't work unattended here, and
+# writing the active theme into /etc/sddm.conf.d is already handled by
+# theme.sh (via SDDM_THEME_GLOB in global.conf) once stage 5 runs.
+echo
+echo "Installing Qylock 'pixel-sakura' SDDM theme"
+QYLOCK_DIR="$(mktemp -d)"
+git clone --depth 1 https://github.com/Darkkal44/qylock.git "${QYLOCK_DIR}"
+sudo mkdir -p /usr/share/sddm/themes
+sudo rm -rf /usr/share/sddm/themes/pixel-sakura
+sudo cp -r "${QYLOCK_DIR}/themes/pixel-sakura" /usr/share/sddm/themes/pixel-sakura
+rm -rf "${QYLOCK_DIR}"
+echo "NOTE: this theme's clock/text wants the 'Pixelify Sans' font (a free"
+echo "Google/OFL-licensed font). If it doesn't render with it, download the"
+echo "font and drop the .ttf into"
+echo "/usr/share/sddm/themes/pixel-sakura/font/ -- see qylock's own README"
+echo "for details."
+
 # --- Change default shell to zsh. Via sudo, not plain chsh: chsh
 # authenticates through PAM using your own login password, which fails
 # with "Authentication failure" when this script runs non-interactively

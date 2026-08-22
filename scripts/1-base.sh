@@ -78,7 +78,9 @@ PKGS=(
     # (uwsm-managed)" entry once uwsm is present), so SDDM picks it up with
     # nothing extra to configure. SDDM's own greeter still renders in X11
     # by default even when launching a Wayland session underneath -- that's
-    # expected and doesn't affect the session you actually log into.
+    # expected and doesn't affect the session you actually log into. (Stage
+    # 6 shortens the uwsm entry's display name to "Hyprland uwsm" -- the
+    # package's default is too long for some SDDM themes.)
     'sddm'                    # Display manager (login screen)
  
     # --- Networking Setup

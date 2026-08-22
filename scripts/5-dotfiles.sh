@@ -156,7 +156,7 @@ echo
 
 echo
 echo "Done!"
-echo "Log out and back into the 'Hyprland (uwsm-managed)' session (or"
+echo "Log out and back into the 'Hyprland uwsm' session (or"
 echo "restart Hyprland with 'hyprctl reload' from inside one) to pick up"
 echo "the new config. Pick a wallpaper with 'waypaper' (or Super+Shift+W) --"
 echo "until you do, Hyprland/Waybar/SwayNC/Alacritty stay on the current"

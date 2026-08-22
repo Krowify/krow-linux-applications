@@ -164,6 +164,23 @@ PKGS=(
     'noto-fonts-emoji'            # Color emoji glyphs (Noto's own, not the
                                    # nerd-fonts symbol set above)
 
+    # SDDM THEME (Qylock 'pixel-sakura') DEPENDENCIES ---------------------
+    # The theme itself isn't packaged (AUR or otherwise) -- it's installed
+    # by hand in stage 3, straight from its GitHub repo -- but its QML/
+    # video-playback dependencies are ordinary official-repo packages, so
+    # they're installed normally here.
+    'qt6-declarative'             # QML engine the theme runs on
+    'qt6-5compat'                 # Qt5-compat QML modules some theme code
+                                   # still uses
+    'qt6-svg'                     # SVG image support in QML
+    'qt6-multimedia'              # Video playback backend for the theme's
+                                   # animated (bg.mp4) background
+    'qt6-multimedia-ffmpeg'       # FFmpeg backend for qt6-multimedia
+    'gst-plugins-base'            # GStreamer plugins qt6-multimedia uses
+    'gst-plugins-good'            # to actually decode bg.mp4 -- all four
+    'gst-plugins-bad'             # tiers requested by the theme's own
+    'gst-plugins-ugly'            # dependency list
+
     # FILE MANAGER ------------------------------------------------------
     'thunar'                      # GUI file manager
     'thunar-archive-plugin'       # Right-click archive/extract via
