@@ -318,6 +318,17 @@ Each theme lives in its own directory under `~/.config/hyde-themes/`
   with it) while every `style = "bg:peach fg:crust"`-style reference
   elsewhere in the file stays untouched, since those just look up
   palette keys by name.
+- `gtk-colors.css`, deployed into both `~/.config/gtk-3.0/gtk.css` and
+  `~/.config/gtk-4.0/gtk.css` (GTK auto-loads a `gtk.css` from each as a
+  user override, no reference from `settings.ini` needed). Reinforces the
+  theme's real accent color as GTK's own accent/selection color
+  (`accent_color`/`accent_bg_color`/`accent_fg_color` for GTK4/libadwaita,
+  `theme_selected_bg_color`/`theme_selected_fg_color` for GTK3), so
+  Thunar's selection highlight (and any other GTK app's) matches exactly
+  -- independent of whatever accent the separately-downloaded GTK theme
+  below happens to use on its own. Restart Thunar (or any running GTK
+  app) to pick it up; there's no live-reload signal for `gtk.css` the way
+  there is for `gsettings`.
 - `theme.conf`, naming the GTK theme + icon theme this desktop theme
   needs (as case-insensitive glob patterns, same idea as stage 5's old
   folder detection) and, optionally, a URL to fetch them from if they

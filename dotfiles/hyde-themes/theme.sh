@@ -120,6 +120,21 @@ apply_gtk_icon_cursor() {
         set_kv "${HOME}/.config/${gtk_dir}/settings.ini" 'gtk-cursor-theme-name=' "${cursor_theme}"
     done
 
+    # gtk.css: reinforces this theme's real accent color (see
+    # gtk-colors.css's own header) as GTK's accent/selection color,
+    # independent of whatever the downloaded GTK theme above uses on its
+    # own. GTK auto-loads gtk.css from both dirs as a user override, no
+    # settings.ini reference needed.
+    local theme_dir gtk_css_src
+    theme_dir="$(dirname "${theme_conf}")"
+    gtk_css_src="${theme_dir}/gtk-colors.css"
+    if [[ -f "${gtk_css_src}" ]]; then
+        for gtk_dir in gtk-3.0 gtk-4.0; do
+            mkdir -p "${HOME}/.config/${gtk_dir}"
+            cp "${gtk_css_src}" "${HOME}/.config/${gtk_dir}/gtk.css"
+        done
+    fi
+
     mkdir -p "${HOME}/.icons/default"
     printf '[Icon Theme]\nInherits=%s\n' "${cursor_theme}" > "${HOME}/.icons/default/index.theme"
 

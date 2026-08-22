@@ -1,0 +1,21 @@
+/* Deployed by theme.sh into ~/.config/gtk-3.0/gtk.css and
+   ~/.config/gtk-4.0/gtk.css -- GTK auto-loads a gtk.css from both as a
+   user override on top of whatever GTK theme is selected, no reference
+   from settings.ini needed. This reinforces the theme's real accent
+   color (colActiveBorder1 in hypr-colors.conf, same value used
+   everywhere else -- Waybar, Rofi, fastfetch, Starship) as GTK's own
+   accent/selection color, so Thunar's selection highlight (and any
+   other GTK3/GTK4 app's) matches exactly, rather than relying on
+   whatever accent the separately-downloaded HyDE GTK theme
+   (theme.conf's GTK_THEME_ASSET_URL) happens to use on its own.
+   Restart Thunar (or any running GTK app) to pick this up -- there's no
+   live-reload signal for gtk.css the way there is for gsettings. */
+
+/* GTK4 / libadwaita named colors */
+@define-color accent_color #d9d9d9;
+@define-color accent_bg_color #d9d9d9;
+@define-color accent_fg_color #1a1a1a;
+
+/* GTK3 legacy named colors (older Thunar/GTK3 builds) */
+@define-color theme_selected_bg_color #d9d9d9;
+@define-color theme_selected_fg_color #1a1a1a;
